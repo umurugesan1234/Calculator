@@ -18,7 +18,8 @@ Branch & PR workflow
    - (Optionally) run any tests if added later.
 4. Commit messages
    - Use short, descriptive messages. Optionally follow Conventional Commits: `feat:`, `fix:`, `chore:`.
-5. Push the branch and open a Pull Request targeting `main` when the change is ready. Describe the change, link issues, and include screenshots if UI changed.
+5. Push the branch and open a Pull Request targeting `dev` when the change is ready. Describe the change, link issues, and include screenshots if UI changed.
+   - Only open a Pull Request targeting `main` when preparing a release (e.g., merging `dev` into `main`).
 6. PR review & merge
    - At least one reviewer approval is required (project policy). Maintainers may request changes.
    - Use squash or merge commits depending on project preference (squash recommended for small projects).
