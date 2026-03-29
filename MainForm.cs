@@ -21,7 +21,7 @@ namespace Calculator
     private void InitializeComponent()
         {
             this.Text = "Simple Calculator";
-            this.ClientSize = new Size(320, 480);
+            this.ClientSize = new Size(320, 560);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
@@ -34,25 +34,26 @@ namespace Calculator
             display.Text = "0";
 
         panel = new TableLayoutPanel();
-            panel.RowCount = 5;
+            panel.RowCount = 6;
             panel.ColumnCount = 4;
             panel.Dock = DockStyle.Fill;
             panel.Padding = new Padding(6);
             panel.BackColor = SystemColors.Control;
 
         for (int i = 0; i < 4; i++) panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            for (int i = 0; i < 5; i++) panel.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            for (int i = 0; i < 6; i++) panel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F / 6F));
 
-        string[,] layout = new string[5,4]
+        string[,] layout = new string[6,4]
             {
                 {"C","±","%","/"},
                 {"7","8","9","*"},
                 {"4","5","6","-"},
                 {"1","2","3","+"},
-                {"0",".","=",""}
+                {"0",".","=",""},
+                {"mod","","",""}
             };
 
-        for (int r = 0; r < 5; r++)
+        for (int r = 0; r < 6; r++)
             {
                 for (int c = 0; c < 4; c++)
                 {
@@ -71,6 +72,14 @@ namespace Calculator
                         // 0 spans two columns
                         panel.Controls.Add(btn, 0, 4);
                         panel.SetColumnSpan(btn, 2);
+                        continue;
+                    }
+
+                    if (r == 5 && c == 0)
+                    {
+                        // mod spans all four columns
+                        panel.Controls.Add(btn, 0, 5);
+                        panel.SetColumnSpan(btn, 4);
                         continue;
                     }
 
@@ -110,6 +119,7 @@ namespace Calculator
                 case "*": Oper("*"); break;
                 case "-": Oper("-"); break;
                 case "+": Oper("+"); break;
+                case "mod": Oper("mod"); break;
                 case "=": EqualsOp(); break;
             }
         }
@@ -200,6 +210,7 @@ namespace Calculator
                     "-" => a - b,
                     "*" => a * b,
                     "/" => b == 0 ? double.NaN : a / b,
+                    "mod" => b == 0 ? double.NaN : a % b,
                     _ => b,
                 };
             }
