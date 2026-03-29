@@ -1,5 +1,7 @@
 Simple Calculator (WinForms, .NET 8)
 
+![CI](https://github.com/umurugesan1234/Calculator/actions/workflows/ci.yml/badge.svg)
+
 This is a minimal Windows Forms calculator app targeting .NET 8.
 
 How to build
